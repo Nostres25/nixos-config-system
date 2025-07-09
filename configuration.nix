@@ -174,6 +174,9 @@
   services.tlp = {
       enable = true;
       settings = {
+        TLP_DEFAULT_MODE = "BAT";
+        TLP_PERSISTENT_DEFAULT = 1;
+
         CPU_SCALING_GOVERNOR_ON_AC = "performance";
         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
 
@@ -185,9 +188,9 @@
         CPU_MIN_PERF_ON_BAT = 0;
         CPU_MAX_PERF_ON_BAT = 90;
 
-       #Optional helps save long term battery health
-       START_CHARGE_THRESH_BAT0 = 40; # 40 and below it starts to charge
-       STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
+        #Optional helps save long term battery health
+        START_CHARGE_THRESH_BAT0 = 40; # 40 and below it starts to charge
+        STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
 
       };
   };
@@ -200,7 +203,7 @@
     localNetworkGameTransfers.openFirewall = false; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
-    programs.zsh = {
+  programs.zsh = {
     enable = true;
     #enableCompletions = true; didn't works
     autosuggestions.enable = true;
