@@ -169,12 +169,28 @@
   # (e.g. man configuration.niiix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
   
-  #services.tlp.enable = true;
+  # power management for laptop
+  services.tlp = {
+      enable = true;
+      settings = {
+        CPU_SCALING_GOVERNOR_ON_AC = "performance";
+        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+        CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+
+        CPU_MIN_PERF_ON_AC = 0;
+        CPU_MAX_PERF_ON_AC = 100;
+        CPU_MIN_PERF_ON_BAT = 0;
+        CPU_MAX_PERF_ON_BAT = 90;
+
+       #Optional helps save long term battery health
+       START_CHARGE_THRESH_BAT0 = 40; # 40 and below it starts to charge
+       STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
+
+      };
+  };
   powerManagement.powertop.enable = true;
-  
-  # Bluetooth
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = false;
   
   programs.steam = {
     enable = true;
@@ -182,11 +198,10 @@
     dedicatedServer.openFirewall = false; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = false; # Open ports in the firewall for Steam Local Network Game Transfers
   };
-  #programs.bash.enable = true;
 
     programs.zsh = {
     enable = true;
-    #enableCompletions = true;
+    #enableCompletions = true; didn't works
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
 
@@ -194,7 +209,7 @@
       ll = "ls -l";
       update = "sudo nixos-rebuild switch";
     };
-    #history.size = 10000;
+    #history.size = 10000; didn't works
     ohMyZsh = { # "ohMyZsh" without Home Manager
       enable = true;
       plugins = [ "git" "thefuck" ];
