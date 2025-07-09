@@ -13,6 +13,21 @@
       ./home-manager.nix
     ]; 
 
+
+  # Auto updating
+  system.autoUpgrade = {
+    enable = true;
+    dates = "weekly";
+  };
+
+  # Auto cleanup
+  nix.gc = {
+    automatic = true;
+    dates = "daily";
+    options = "--delete-older-than 10d";
+  };
+
+  nix.settings.auto-optimise-store = true;
     
   # Enabled for nix-gui:
   nix.extraOptions = ''experimental-features = nix-command flakes'';
@@ -160,9 +175,9 @@
   
   programs.steam = {
     enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+    remotePlay.openFirewall = false; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = false; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = false; # Open ports in the firewall for Steam Local Network Game Transfers
   };
   #programs.bash.enable = true;
 
@@ -177,7 +192,7 @@
       update = "sudo nixos-rebuild switch";
     };
     #history.size = 10000;
-    oh-my-zsh = { # "ohMyZsh" without Home Manager
+    ohMyZsh = { # "ohMyZsh" without Home Manager
       enable = true;
       plugins = [ "git" "thefuck" ];
       theme = "robbyrussell";
