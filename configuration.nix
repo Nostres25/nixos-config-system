@@ -137,6 +137,9 @@
     postgresql
     php
     zsh
+
+    # Nix formatter for the system configuration
+    nixfmt-rfc-style
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
