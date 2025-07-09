@@ -138,8 +138,9 @@
     php
     zsh
 
-    # Nix formatter for the system configuration
-    nixfmt-rfc-style
+    # To make nix configuration easier   
+    nixfmt-rfc-style # Nix formatter
+    nil # Nix Language server
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
