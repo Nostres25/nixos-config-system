@@ -170,6 +170,7 @@
   system.stateVersion = "25.05"; # Did you read the comment?
   
   # power management for laptop
+  services.power-profiles-daemon.enable = false; #conflict with tlp
   services.tlp = {
       enable = true;
       settings = {
