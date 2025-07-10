@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   imports = [
@@ -150,9 +150,18 @@
     nixfmt-rfc-style # Nix formatter
     nil # Nix Language server
     nixd # Another nix language server
-  ];
 
-  # if using flakes nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    # To display upgrades
+    nvd
+  ];
+  
+  # Script for display upgrades
+  system.activationScripts.report-changes = ''
+      PATH=$PATH:${lib.makeBinPath [pkgs.nvd pkgs.nix]}
+      nvd diff $(ls -d1v /nix/var/nix/profiles/system-*-link|tail -n 2)
+    '';
+
+  # TODO if using flakes nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   # users.defaultUserShell = pkgs.zsh; useful ? TODO
   environment.shells = with pkgs; [ zsh ];
