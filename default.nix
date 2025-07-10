@@ -2,13 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./firefox.nix
+      
       ./gnome.nix
       ./home-manager.nix
     ]; 
@@ -29,14 +29,14 @@
 
   nix.settings.auto-optimise-store = true;
     
-  # Enabled for nix-gui:
+  # Enabled for nix-gui: TODO remove 
   nix.extraOptions = ''experimental-features = nix-command flakes'';
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nixos-nostres"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -102,13 +102,15 @@
    # services.libinput.touchpad.clickMethod = "buttonareas";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.nostres = {
-    isNormalUser = true;
-    description = "nostres";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
+  users.users = { 
+      nostres = {
+      isNormalUser = true;
+      description = "nostres";
+      extraGroups = [ "networkmanager" "wheel" ];
+      /*packages = with pkgs; [ # Using home manager ?
+        thunderbird
+      ];*/
+    };
   };
 
   # Allow unfree packages
@@ -118,30 +120,70 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-    geany
+  
+  # Dev 
     vscodium
     nodejs
     pnpm
-    discord
-    htop
-    zip
-    unzip
-    octave
-    git
-    obs-studio
-    jdk8
+    postgresql
     jdk21
     eclipses.eclipse-jee
-    steam #doesn't works ;-;
-    postgresql
-    php
+
+  # TODO temporaray: didn't works with home manager
+  discord
+  steam
+  obs-studio
+  
+  # CLI
+    git
     zsh
+    htop
+    powertop
+    zip
+    unzip
 
     # To make nix configuration easier   
     nixfmt-rfc-style # Nix formatter
     nil # Nix Language server
   ];
+
+  programs.zsh = {
+    enable = true;
+    #enableCompletions = true; didn't works
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+
+    shellAliases = {
+      ll = "ls -l";
+      update = "sudo nixos-rebuild switch";
+    };
+    #history.size = 10000; didn't works
+    ohMyZsh = { # "ohMyZsh" without Home Manager
+      enable = true;
+      plugins = [ "git" "thefuck" ];
+      theme = "robbyrussell";
+    };
+  };
+
+  programs.steam = {
+      enable = true;
+      remotePlay.openFirewall = false; # Open ports in the firewall for Steam Remote Play
+      dedicatedServer.openFirewall = false; # Open ports in the firewall for Source Dedicated Server
+      localNetworkGameTransfers.openFirewall = false; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
+
+  programs.obs-studio = {
+    enable = true;
+    plugins = with pkgs.obs-studio-plugins; [
+    wlrobs
+    obs-backgroundremoval
+    obs-pipewire-audio-capture
+    #obs-vaapi #optional AMD hardware acceleration
+    obs-gstreamer
+    #obs-vkcaptur doesn't works because ???
+    ];
+  };
+
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -161,14 +203,6 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-
-  # This value determines the NixOS release from which the default
-  # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
-  # this value at the release version of the first install of this system.
-  # Before changing this value read the documentation for this option
-  # (e.g. man configuration.niiix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "25.05"; # Did you read the comment?
   
   # power management for laptop
   services.power-profiles-daemon.enable = false; #conflict with tlp
@@ -196,32 +230,15 @@
       };
   };
   powerManagement.powertop.enable = true;
-  
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = false; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = false; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall = false; # Open ports in the firewall for Steam Local Network Game Transfers
-  };
 
-  programs.zsh = {
-    enable = true;
-    #enableCompletions = true; didn't works
-    autosuggestions.enable = true;
-    syntaxHighlighting.enable = true;
 
-    shellAliases = {
-      ll = "ls -l";
-      update = "sudo nixos-rebuild switch";
-    };
-    #history.size = 10000; didn't works
-    ohMyZsh = { # "ohMyZsh" without Home Manager
-      enable = true;
-      plugins = [ "git" "thefuck" ];
-      theme = "robbyrussell";
-    };
-  };
-  
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.niiix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "25.05"; # Did you read the comment?
 
 }
 

@@ -1,7 +1,21 @@
-{ config, pkgs, ... }:
-  
-{  
+{ pkgs, ... }:
+{
+
+  home.packages = with pkgs; [
+    # discord doesn't works because "unfree"
+    # obs-studio failed to build ?
+    # steam doesn't works because "unfree"
+    thunderbird
+    
+    octave # i just want to try it
+  ];
+
+
+
+  # Program configurations
   programs = {
+
+
     firefox = {
       enable = true;
       languagePacks = [ "fr" "en-US" ];
@@ -44,7 +58,7 @@
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
             installation_mode = "normal_installed";
           };
-          # Bit warden:
+          # Bitwarden:
           "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden_password_manager/latest.xpi";
             installation_mode = "normal_installed";
@@ -52,9 +66,12 @@
         };
       };
     };
+
+
+    git = {
+      enable = true;
+      userName = "Nostres25";
+      userEmail = "no04so255@gmail.com"; # TODO personal data should be hidded
+    };
   };
-  
-  
-  
-  
-}
+} 

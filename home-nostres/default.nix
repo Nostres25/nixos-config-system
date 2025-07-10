@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 { # home configuration of my nostres user is linked here (~/.config/nixos/home/home.nix)
 
@@ -19,22 +19,9 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  
-  programs.git = {
-    enable = true;
-    userName = "Nostres25";
-    userEmail = "no04so255@gmail.com";
-  };
-  
-  programs.obs-studio = {
-  enable = true;
-  plugins = with pkgs.obs-studio-plugins; [
-    wlrobs
-    obs-backgroundremoval
-    obs-pipewire-audio-capture
-    #obs-vaapi #optional AMD hardware acceleration
-    obs-gstreamer
-    obs-vkcapture
-    ];
-  };
+
+   imports = [
+    ./personal-data-vars.nix
+    ./packages.nix
+   ];
 }

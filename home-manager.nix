@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 let
   home-manager = builtins.fetchTarball "https://github.com/nix-community/home-manager/archive/master.tar.gz";
 in
@@ -7,5 +7,5 @@ in
     (import "${home-manager}/nixos")
   ];
 
-  home-manager.users.nostres = import ./home;
+  home-manager.users.nostres = import ./home-nostres;
 }
