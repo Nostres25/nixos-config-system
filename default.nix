@@ -28,7 +28,7 @@
 
   nix.settings.auto-optimise-store = true;
 
-  # Enabled for nix-gui: TODO remove
+  # Enabled for nix-gui
   nix.extraOptions = ''experimental-features = nix-command flakes'';
 
   # Bootloader.
@@ -119,6 +119,7 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = _: true; # for home manager
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -134,8 +135,6 @@
     eclipses.eclipse-jee
 
     # TODO temporaray: didn't works with home manager
-    discord
-    steam
     obs-studio
     
     # CLI

@@ -1,15 +1,15 @@
 { pkgs, ... }:
 {
+  nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
-    # discord doesn't works because "unfree"
+    discord
     # obs-studio failed to build ?
-    # steam doesn't works because "unfree"
+    steam
     thunderbird
     
     octave # i just want to try it
   ];
-
 
 
   # Program configurations
