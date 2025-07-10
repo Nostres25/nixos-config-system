@@ -19,9 +19,9 @@
     };
   };
   
-  environment.systemPackages = with pkgs; [
+  /*environment.systemPackages = with pkgs; [
     #gnomeExtensions.arc-menu
     #gnomeExtensions.battery-health-charging # not compatible with all devices: https://extensions.gnome.org/extension/5724/battery-health-charging/
-  ];
+  ];*/
 
 }
