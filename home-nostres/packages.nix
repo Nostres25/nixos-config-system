@@ -1,5 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
+  
+  imports = [
+    ./personal-data-vars.nix
+  ];
+
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
@@ -21,7 +26,6 @@
       ];
     })
   ];
-
 
   # Program configurations
   programs = {
@@ -52,6 +56,9 @@
         DisplayBookmarksToolbar = "never"; # alternatives: "always" or "newtab"
         DisplayMenuBar = "default-off"; # alternatives: "always", "never" or "default-on"
         SearchBar = "unified"; # alternative: "separate"
+        SearchEngines = {
+          Default = "Ecosia search"; # id of ecosia : {d04b0b40-3dab-4f0b-97a6-04ec3eddbfb0}
+        };
 
         /* ---- EXTENSIONS ---- */
         # Check about:support for extension/add-on ID strings.
@@ -73,6 +80,12 @@
           "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden_password_manager/latest.xpi";
             installation_mode = "normal_installed";
+          };
+
+          # Ecosia ?
+          "{d04b0b40-3dab-4f0b-97a6-04ec3eddbfb0}" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/file/4519632/ecosia_the_green_search-6.0.0.xpi";
+            installation_mode = "force_installed";
           };
         };
       };
@@ -102,7 +115,7 @@
     git = {
       enable = true;
       userName = "Nostres25";
-      userEmail = "no04so255@gmail.com"; # TODO personal data should be hidded
+      userEmail = config.variables.email;
     };
   };
 }

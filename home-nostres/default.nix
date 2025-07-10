@@ -21,7 +21,6 @@
   programs.home-manager.enable = true;
 
    imports = [
-    ./personal-data-vars.nix
     ./packages.nix
    ];
 }
