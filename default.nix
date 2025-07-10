@@ -5,14 +5,13 @@
 { pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      
-      ./gnome.nix
-      ./home-manager.nix
-    ]; 
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
 
+    ./gnome.nix
+    ./home-manager.nix
+  ];
 
   # Auto updating
   system.autoUpgrade = {
@@ -28,8 +27,8 @@
   };
 
   nix.settings.auto-optimise-store = true;
-    
-  # Enabled for nix-gui: TODO remove 
+
+  # Enabled for nix-gui: TODO remove
   nix.extraOptions = ''experimental-features = nix-command flakes'';
 
   # Bootloader.
@@ -97,19 +96,24 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-   
-   # Fix right click - not working ?
-   # services.libinput.touchpad.clickMethod = "buttonareas";
+
+  # Fix right click - not working ?
+  # services.libinput.touchpad.clickMethod = "buttonareas";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users = { 
-      nostres = {
+  users.users = {
+    nostres = {
       isNormalUser = true;
       description = "nostres";
-      extraGroups = [ "networkmanager" "wheel" ];
-      /*packages = with pkgs; [ # Using home manager ?
-        thunderbird
-      ];*/
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
+      /*
+        packages = with pkgs; [ # Using home manager ?
+          thunderbird
+        ];
+      */
     };
   };
 
@@ -119,9 +123,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  
-  # Dev 
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+
+    # Dev
     vscodium
     nodejs
     pnpm
@@ -129,12 +133,12 @@
     jdk21
     eclipses.eclipse-jee
 
-  # TODO temporaray: didn't works with home manager
-  discord
-  steam
-  obs-studio
-  
-  # CLI
+    # TODO temporaray: didn't works with home manager
+    discord
+    steam
+    obs-studio
+    
+    # CLI
     git
     zsh
     htop
@@ -142,14 +146,16 @@
     zip
     unzip
 
-    # To make nix configuration easier   
+    # To make nix configuration easier
     nixfmt-rfc-style # Nix formatter
     nil # Nix Language server
+    nixd # Another nix language server
   ];
+
+  # if using flakes nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   # users.defaultUserShell = pkgs.zsh; useful ? TODO
   environment.shells = with pkgs; [ zsh ];
-
   programs.zsh = {
     enable = true;
     #enableCompletions = true; didn't works
@@ -161,32 +167,35 @@
       update = "sudo nixos-rebuild switch";
     };
     #history.size = 10000; didn't works
-    ohMyZsh = { # "ohMyZsh" without Home Manager
+    ohMyZsh = {
+      # "ohMyZsh" without Home Manager
       enable = true;
-      plugins = [ "git" "thefuck" ];
+      plugins = [
+        "git"
+        "thefuck"
+      ];
       theme = "robbyrussell";
     };
   };
 
   programs.steam = {
-      enable = true;
-      remotePlay.openFirewall = false; # Open ports in the firewall for Steam Remote Play
-      dedicatedServer.openFirewall = false; # Open ports in the firewall for Source Dedicated Server
-      localNetworkGameTransfers.openFirewall = false; # Open ports in the firewall for Steam Local Network Game Transfers
+    enable = true;
+    remotePlay.openFirewall = false; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = false; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = false; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
   programs.obs-studio = {
     enable = true;
     plugins = with pkgs.obs-studio-plugins; [
-    wlrobs
-    obs-backgroundremoval
-    obs-pipewire-audio-capture
-    #obs-vaapi #optional AMD hardware acceleration
-    obs-gstreamer
-    #obs-vkcaptur doesn't works because ???
+      wlrobs
+      obs-backgroundremoval
+      obs-pipewire-audio-capture
+      #obs-vaapi #optional AMD hardware acceleration
+      obs-gstreamer
+      #obs-vkcaptur doesn't works because ???
     ];
   };
-
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -206,34 +215,33 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-  
+
   # power management for laptop
-  services.power-profiles-daemon.enable = false; #conflict with tlp
+  services.power-profiles-daemon.enable = false; # conflict with tlp
   services.tlp = {
-      enable = true;
-      settings = {
-        TLP_DEFAULT_MODE = "BAT";
-        TLP_PERSISTENT_DEFAULT = 1;
+    enable = true;
+    settings = {
+      TLP_DEFAULT_MODE = "BAT";
+      TLP_PERSISTENT_DEFAULT = 1;
 
-        CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
 
-        CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
 
-        CPU_MIN_PERF_ON_AC = 0;
-        CPU_MAX_PERF_ON_AC = 100;
-        CPU_MIN_PERF_ON_BAT = 0;
-        CPU_MAX_PERF_ON_BAT = 90;
+      CPU_MIN_PERF_ON_AC = 0;
+      CPU_MAX_PERF_ON_AC = 100;
+      CPU_MIN_PERF_ON_BAT = 0;
+      CPU_MAX_PERF_ON_BAT = 90;
 
-        #Optional helps save long term battery health
-        START_CHARGE_THRESH_BAT0 = 40; # 40 and below it starts to charge
-        STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
+      #Optional helps save long term battery health
+      START_CHARGE_THRESH_BAT0 = 40; # 40 and below it starts to charge
+      STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
 
-      };
+    };
   };
   powerManagement.powertop.enable = true;
-
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -244,6 +252,3 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
 }
-
-
-
