@@ -159,29 +159,9 @@
 
   # TODO if using flakes nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
-  # users.defaultUserShell = pkgs.zsh; useful ? TODO
+  programs.zsh.enable = true;
   environment.shells = with pkgs; [ zsh ];
-  programs.zsh = {
-    enable = true;
-    #enableCompletions = true; didn't works
-    autosuggestions.enable = true;
-    syntaxHighlighting.enable = true;
-
-    shellAliases = {
-      ll = "ls -l";
-      update = "sudo nixos-rebuild switch";
-    };
-    #history.size = 10000; didn't works
-    ohMyZsh = {
-      # "ohMyZsh" without Home Manager
-      enable = true;
-      plugins = [
-        "git"
-        "thefuck"
-      ];
-      theme = "robbyrussell";
-    };
-  };
+  users.defaultUserShell = pkgs.zsh;
 
   programs.steam = {
     enable = true;
@@ -228,7 +208,7 @@
       CPU_MIN_PERF_ON_BAT = 0;
       CPU_MAX_PERF_ON_BAT = 90;
 
-      #Optional helps save long term battery health
+      #Optional helps save long term battery health - doesn't works on Y13 (no driver support)
       START_CHARGE_THRESH_BAT0 = 40; # 40 and below it starts to charge
       STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
 
