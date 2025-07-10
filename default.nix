@@ -147,6 +147,9 @@
     nil # Nix Language server
   ];
 
+  # users.defaultUserShell = pkgs.zsh; useful ? TODO
+  environment.shells = with pkgs; [ zsh ];
+
   programs.zsh = {
     enable = true;
     #enableCompletions = true; didn't works
