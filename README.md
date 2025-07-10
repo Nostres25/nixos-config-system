@@ -40,6 +40,13 @@ Mon fichier `/etc/nixos/configuration.nix` ressemble désormais à ceci:
 ```
 -# Vous l'aurez remarqué, l'importation se fait depuis un répertoire. Dans cette situation, cela prend en réalité le fichier `default.nix` présent dans ce répertoire. 
 
+Et j'ai du rediriger la configuration de mon utilisateur (nostres) vers `~/.config/nixos/home-nostres` à l'aide de cette ligne dans `home-manager.nix`:
+```nix
+{
+  home-manager.users.nostres = import ./home-nostres;
+}
+```
+
 
 Trouvant la configuration NixOs archaïque, non pas que m'aider d'internet me dérange mais que ça manque peut-être un peu d'autocomplétion et de correction syntaxique, j'ai cherché à simplifier la configuration en Nix avec des outils supplémentaires.
 J'ai donc :

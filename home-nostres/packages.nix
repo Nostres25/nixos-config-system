@@ -57,7 +57,7 @@
         DisplayMenuBar = "default-off"; # alternatives: "always", "never" or "default-on"
         SearchBar = "unified"; # alternative: "separate"
         SearchEngines = {
-          Default = "Ecosia search"; # id of ecosia : {d04b0b40-3dab-4f0b-97a6-04ec3eddbfb0}
+          Default = "Ecosia search"; # id of ecosia ext : {d04b0b40-3dab-4f0b-97a6-04ec3eddbfb0}
         };
 
         /* ---- EXTENSIONS ---- */
@@ -82,10 +82,10 @@
             installation_mode = "normal_installed";
           };
 
-          # Ecosia ?
+          # Ecosia
           "{d04b0b40-3dab-4f0b-97a6-04ec3eddbfb0}" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/file/4519632/ecosia_the_green_search-6.0.0.xpi";
-            installation_mode = "force_installed";
+            installation_mode = "normal_installed";
           };
         };
       };

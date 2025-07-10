@@ -144,11 +144,14 @@
 
     # To make nix configuration easier
     nixfmt-rfc-style # Nix formatter
-    nil # Nix Language server
+    #nil # Nix Language server
     nixd # Another nix language server
 
     # To display upgrades
     nvd
+
+    # for everyone
+    libreoffice
   ];
   
   # Script for display upgrades
