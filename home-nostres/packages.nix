@@ -4,11 +4,22 @@
 
   home.packages = with pkgs; [
     discord
-    # obs-studio failed to build ?
     steam
     thunderbird
     
     octave # i just want to try it
+    
+    # obs with plugins
+    (pkgs.wrapOBS {
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-backgroundremoval
+      obs-pipewire-audio-capture
+      #obs-vaapi #optional AMD hardware acceleration
+      obs-gstreamer
+      #obs-vkcaptur doesn't works because ???
+    ];
+  })
   ];
 
 
@@ -74,4 +85,4 @@
       userEmail = "no04so255@gmail.com"; # TODO personal data should be hidded
     };
   };
-} 
+}

@@ -133,9 +133,6 @@
     postgresql
     jdk21
     eclipses.eclipse-jee
-
-    # TODO temporaray: didn't works with home manager
-    obs-studio
     
     # CLI
     git
@@ -191,18 +188,6 @@
     remotePlay.openFirewall = false; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = false; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = false; # Open ports in the firewall for Steam Local Network Game Transfers
-  };
-
-  programs.obs-studio = {
-    enable = true;
-    plugins = with pkgs.obs-studio-plugins; [
-      wlrobs
-      obs-backgroundremoval
-      obs-pipewire-audio-capture
-      #obs-vaapi #optional AMD hardware acceleration
-      obs-gstreamer
-      #obs-vkcaptur doesn't works because ???
-    ];
   };
 
   # Some programs need SUID wrappers, can be configured further or are
