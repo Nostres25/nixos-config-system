@@ -108,6 +108,7 @@
       extraGroups = [
         "networkmanager"
         "wheel"
+        "docker"
       ];
       /*
         packages = with pkgs; [ # Using home manager ?
@@ -119,7 +120,17 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowUnfreePredicate = _: true; # for home manager
+
+  # Enable virtualisation for docker & docker daemon settings
+  # more details on https://nixos.wiki/wiki/Docker
+  virtualisation.docker = {
+    enable = true;
+    daemon.settings = { 
+      fixed-cidr-v6 = "fd00::/80";
+      ipv6 = true; 
+      live-restore = true;
+    };
+  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -144,14 +155,14 @@
 
     # To make nix configuration easier
     nixfmt-rfc-style # Nix formatter
-    #nil # Nix Language server
     nixd # Another nix language server
-
-    # To display upgrades
-    nvd
 
     # for everyone
     libreoffice
+    
+    # To display upgrades
+    nvd
+
   ];
   
   # Script for display upgrades

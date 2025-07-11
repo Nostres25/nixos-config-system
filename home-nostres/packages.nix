@@ -1,10 +1,6 @@
 { pkgs, config, ... }:
 {
-  
-  imports = [
-    ./personal-data-vars.nix
-  ];
-
+  # Allow unfree packages in home
   nixpkgs.config.allowUnfree = true;
 
   home.packages = with pkgs; [
@@ -13,7 +9,14 @@
     thunderbird
     
     octave # i just want to try it
-    
+
+    /*(pkgs.dockerTools.buildImage {
+      name = "hello-docker";
+      config = {
+        Cmd = [ "a/bin/hello" ];
+      };
+    })*/
+
     # obs with plugins
     (pkgs.wrapOBS {
     plugins = with pkgs.obs-studio-plugins; [
@@ -57,7 +60,7 @@
         DisplayMenuBar = "default-off"; # alternatives: "always", "never" or "default-on"
         SearchBar = "unified"; # alternative: "separate"
         SearchEngines = {
-          Default = "Ecosia search"; # id of ecosia ext : {d04b0b40-3dab-4f0b-97a6-04ec3eddbfb0}
+          Default = "Ecosia search"; # Name of the search engine like writed in firefox settings
         };
 
         /* ---- EXTENSIONS ---- */
@@ -91,7 +94,7 @@
       };
     };
 
-    zsh = { # TODO into home manager
+    zsh = {
       enable = true;
       syntaxHighlighting.enable = true;
 
