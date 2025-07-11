@@ -1,7 +1,9 @@
 <h1>Bienvenue dans ma configuration NixOs</h1>
+
 ## Contexte
 
 <h3>Introduction à Nix et à NixOs</h3>
+
 Pour ceux qui ne connaissent pas, NixOs est une distribution linux pas comme les autres.
 En effet, contrairement à la plupart des distributions linux, il ne respecte pas [la norme de la hiérarchie des systèmes de fichiers (FHS)](https://fr.wikipedia.org/wiki/Filesystem_Hierarchy_Standard).
 En effet, il est basé sur le [gestionnaire de packets Nix](https://fr.wikipedia.org/wiki/Nix_(gestionnaire_de_paquets)), qui promet la reproductibilité, la robustesse, la portabilité et la stabilité. 
