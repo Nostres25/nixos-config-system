@@ -148,7 +148,7 @@
     # CLI
     git
     zsh
-    htop
+    btop
     powertop
     zip
     unzip
