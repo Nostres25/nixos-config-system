@@ -149,7 +149,6 @@
     git
     zsh
     btop
-    powertop
     zip
     unzip
 
