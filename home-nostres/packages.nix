@@ -28,6 +28,7 @@
       #obs-vkcaptur doesn't works because ???
       ];
     })
+
   ];
 
   # Program configurations
@@ -101,6 +102,7 @@
       shellAliases = {
         ll = "ls -l";
         update = "sudo nixos-rebuild switch";
+        nixconf = "codium ~/.config/nixos";
       };
       history.size = 10000; 
 
@@ -108,7 +110,6 @@
         enable = true;
         plugins = [
           "git"
-          "thefuck"
         ];
         theme = "robbyrussell";
       };
