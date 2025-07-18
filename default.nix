@@ -121,7 +121,7 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Enable virtualisation for docker & docker daemon settings
+  # Enable docker
   # more details on https://nixos.wiki/wiki/Docker
   virtualisation.docker = {
     enable = true;
@@ -131,6 +131,10 @@
       live-restore = true;
     };
   };
+
+  # Enable virtualbox 
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -151,6 +155,7 @@
     btop
     zip
     unzip
+    wget
 
     # To make nix configuration easier
     nixfmt-rfc-style # Nix formatter
