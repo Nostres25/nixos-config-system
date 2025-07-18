@@ -61,7 +61,7 @@
         DisplayMenuBar = "default-off"; # alternatives: "always", "never" or "default-on"
         SearchBar = "unified"; # alternative: "separate"
         SearchEngines = {
-          Default = "Ecosia search"; # Name of the search engine like writed in firefox settings
+          Default = "Ecosia search"; # Name of the search engine like it's writed in firefox settings
         };
 
         /* ---- EXTENSIONS ---- */

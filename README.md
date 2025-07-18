@@ -2,7 +2,7 @@
 Ce document contient :
 - [Une brève présentation de Nix et NixOs](#introduction-à-nix-et-à-nixos)
 - [Une présentation détaillée de l'organisation de mon système NixOs](#organisation-du-système)
-- [Enfin une liste des problématiques rencontrées avec la solution trouvée](#problématiques-rencontrées)
+- [Enfin une liste des problématiques rencontrées avec les solutions trouvées](#problématiques-rencontrées)
 
 # Introduction à Nix et à NixOs
 
@@ -106,8 +106,86 @@ Solution trouvée :
 ```
 Seulement mon ordinateur portable (Unowhy Y13) n'est pas compatible en vu de ses pilotes de gestion de la batterie :/
 
-### Définir des extensions firefox (bientôt)
-### Définir un moteur de recherche par défaut (ex: Ecosia) (bientôt)
+### Définir des extensions firefox
+Pour la configuration Nix de firefox en général, je vous invite à regarder ma configuration dans le fichier [`home-nostres/packages.nix`](./home-nostres/packages.nix). Ici on s'intéresse surtout à l'ajout d'extensions firefox en déclaratif.</br>
+La solution est la suivante:
+
+```nix
+{
+  # [...]
+  programs.firefox = {
+    enable = true;
+
+      /* ---- EXTENSIONS ---- */
+      # - installation_mode ne prend que: "allowed", "blocked",
+      #   "force_installed" ou "normal_installed".
+      ExtensionSettings = {
+        "*".installation_mode = ""; # blocks all addons except the ones specified below
+
+        # Format:
+        # "<extensionID>" = {
+        #   install_url = "<extension_url>"
+        #   insallation_mode = "<installation_mode>"
+        # }
+
+        # Exemples:
+        # uBlock Origin: 
+        "uBlock0@raymondhill.net" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+          installation_mode = "normal_installed";
+        };
+        # Dark Reader:
+        "addon@darkreader.org" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
+          installation_mode = "normal_installed";
+        };
+        # Bitwarden:
+        "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden_password_manager/latest.xpi";
+          installation_mode = "normal_installed";
+        };
+
+        # Ecosia search
+        "{d04b0b40-3dab-4f0b-97a6-04ec3eddbfb0}" = {
+          install_url = "https://addons.mozilla.org/firefox/downloads/file/4519632/ecosia_the_green_search-6.0.0.xpi";
+          installation_mode = "normal_installed";
+        };
+      };
+    };
+}
+```
+
+1. Pour récupérer l'identifiant des extensions déjà installées, mettez "about:support" dans la barre d'URL.
+2. Pour récupérer l'URL de l'extension, rendez-vous sur la page https://addons.mozilla.org/fr/firefox/ de l'extension voulue, puis copier le lien du bouton "ajouter". 
+> [!TIP]
+> Vous allez ensuite très probablement récupérer un lien comme celui ci: `https://addons.mozilla.org/firefox/downloads/file/<fichierId>/<extensionNom>-<numéroVersion>.xpi`. Ce lien fonctionnera mais si vous souhaitez garantire de toujours avoir la dernière version de l'extension sans changer l'URL, vous pouvez reprendre le nom de l'extension dans l'url récupérée pour l'utiliser dans l'url suivante: `https://addons.mozilla.org/firefox/downloads/latest/<extensionNom>/latest.xpi`. Toutefois j'ai observé que l'extension latest n'existe pas pour toutes les extensions comme pour Ecosia par exemple. 
+
+
+### Définir un moteur de recherche par défaut (ex: Ecosia)
+Pour la configuration Nix de firefox en général, je vous invite à regarder ma configuration dans le fichier [`home-nostres/packages.nix`](./home-nostres/packages.nix). Ici on s'intéresse surtout au paramétrage du moteur de recherche par défaut.</br>
+La solution est la suivante:
+
+```nix
+{
+  # [...]
+  programs.firefox = {
+    enable = true;
+
+    /* ---- POLICIES ---- */
+    # Mettez "about:policies#documentation" dans la barre d'URL pour plus d'options.
+    policies = {
+      SearchEngines = {
+        Default = "Ecosia search"; # Nom du moteur de recherche affiché dans les paramètres firefox
+      };
+    };
+  };
+}
+```
+
+Ecosia, n'est pas installé par défaut sur firefox. Ainsi, si vous souhaitez utiliser un moteur de recherche autre comme Ecosia, il faut également l'ajouter en tant qu'extension [comme cela a été fait juste au dessus](#définir-des-extensions-firefox).
+
+
+
 ### Définir des variables utilisables dans d'autres fichiers Nix.
 J'ai cherché à définir des variables dans un fichier pour les utiliser dans d'autres fichiers pour des raisons de confidentialité.
 En effet, j'ai besoin de certaines données personnelles dans ma configuration mais je ne souhaite pas qu'elles soient présentes sur ce GitHub affichant publiquement ma configuration Nix.
@@ -157,14 +235,12 @@ La solution a été d'ajouter [un swap](https://fr.wikipedia.org/wiki/Espace_d%2
 `hardware-configuration.nix`
 ```nix
 {
-  # ...
-
   swapDevices = [{
     device = "/swapfile";
     size = 8 * 1024; # 8GB
   }];
 
-  # ...
+  # [...]
 }
 ```
 
@@ -206,14 +282,14 @@ Pour mettre à jour les paquets automatiquement, il suffit d'ajouter :
 `configuration.nix`
 ```nix
 {
-  # ...
+  # [...]
 
   system.autoUpgrade = {
     enable = true;
     dates = "weekly"; #Voir https://mynixos.com/nixpkgs/option/system.autoUpgrade.dates pour les formats
   };
 
-  # ...
+  # [...]
 }
 ```
 Cela mettra à jour les paquets toutes les semaines.
@@ -226,7 +302,7 @@ Pour supprimer les ancinnes images:
 `configuration.nix`
 ```nix
 {
-  # ...
+  # [...]
 
   # Voir https://mynixos.com/options/nix.gc pour plus de personnalisation
   nix.gc = {
@@ -236,7 +312,7 @@ Pour supprimer les ancinnes images:
   };
   nix.settings.auto-optimise-store = true;
 
-  # ...
+  # [...]
 }
 ```
 Ceci va supprimer tous les jours les images sysèmes ayant plus de 10 jours d'ancienneté.
@@ -251,10 +327,10 @@ Pour remédier à cela, voici la solution:
   pkgs, lib, ...
 }:
 {
-  #...
+  # [...]
 
   environment.systemPackages = with pkgs; [
-    # ...
+    # [...]
 
     nvd
   ];
@@ -264,7 +340,7 @@ Pour remédier à cela, voici la solution:
     nvd diff $(ls -d1v /nix/var/nix/profiles/system-*-link|tail -n 2)
   '';
 
-  # ...
+  # [...]
 }
 ```
 
