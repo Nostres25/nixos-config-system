@@ -156,7 +156,7 @@
     libreoffice
 
     # To run windows app
-    wineWowPackages.yabridge
+    wineWowPackages.stable
 
     # Virtual device
     virtualbox
