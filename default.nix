@@ -166,6 +166,9 @@
 
     # To run windows app
     wineWowPackages.yabridge
+
+    # Virtual device
+    virtualbox
     
     # To display upgrades
     nvd
