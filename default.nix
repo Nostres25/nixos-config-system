@@ -163,6 +163,9 @@
 
     # for everyone
     libreoffice
+
+    # To run windows app
+    wineWowPackages.yabridge
     
     # To display upgrades
     nvd
