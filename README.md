@@ -8,7 +8,7 @@ Ce document contient :
 
 Si vous ne connaissez pas, NixOs est une [distributions linux](https://fr.wikipedia.org/wiki/Distribution_Linux) pas comme les autres.</br>
 En effet, contrairement à la plupart des distributions linux, il ne respecte pas [la norme de la hiérarchie des systèmes de fichiers (FHS)](https://fr.wikipedia.org/wiki/Filesystem_Hierarchy_Standard).</br>
-En effet, il est basé sur le [gestionnaire de paquets Nix](https://fr.wikipedia.org/wiki/Nix_(gestionnaire_de_paquets)), qui promet la reproductibilité, la robustesse, la portabilité et la stabilité. On a l'habitude de le présenter comme un système qu'on peut coder. C'est-à-dire que sa configuration est déclarative.</br>
+Il est basé sur le [gestionnaire de paquets Nix](https://fr.wikipedia.org/wiki/Nix_(gestionnaire_de_paquets)), qui promet la reproductibilité, la robustesse, la portabilité et la stabilité. On a l'habitude de le présenter comme un système qu'on peut coder. C'est-à-dire que sa configuration est déclarative.</br>
 Pour en savoir plus, je vous invite à vous renseigner sur [NixOs](https://fr.wikipedia.org/wiki/NixOS) et [Nix](https://fr.wikipedia.org/wiki/Nix_(gestionnaire_de_paquets)) à travers wikipedia, des vidéos ou autre.
 ###### Car oui, le gestionnaire de paquets Nix est également utilisable sur Windows les autres distributions linux
 
