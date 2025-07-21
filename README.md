@@ -16,7 +16,7 @@ Pour en savoir plus, je vous invite à vous renseigner sur [NixOs](https://fr.wi
 
 J'ai découvert NixOs grâce à un bon ami qui m'en a parlé. J'ai par la suite souhaité l'essayer, pour finir par l'adopter !
 Ma crainte initiale était qu'il faille passer par des étapes compliquées et/ou très chronophages pour installer le moindre paquet ou pour changer de petites options.</br>
-Et en effet NixOs demande un certain temps de compréhension et requiert beaucoup de temps pour le personnaliser exactement comme on le souhaite, en passant par des paramètres avancés. Surtout si tient à tout configurer en déclaratif afin d'avoir un système reproductible au maximum.
+Et en effet NixOs demande un certain temps de compréhension et requiert beaucoup de temps pour le personnaliser exactement comme on le souhaite, en passant par des paramètres avancés. Surtout si on tient à tout configurer en déclaratif afin d'avoir un système reproductible au maximum.
 
 Mais en réalité ce n'est pas une nécéssité. Si on installes NixOs avec un [environnement de bureau](https://fr.wikipedia.org/wiki/Environnement_de_bureau) comme Gnome ou Plasma KDE, le système sera **en apparence** identique à un autre système linux utilisant le même environnement de bureau. Firefox y est préinstallé et beaucoup de paramètres sont modifiables via l'application "Paramètres". La différence se situe surtout dans la gestion des paquets et dans les options du système qu'on souhaite reproductibles.
 ###### Les paramètres modifiés via les applications, les différents paquets ou depuis l'application "Paramètres" ne seront pas dans la configuration Nix et ne seront donc pas exportés si vous transférez votre configuration Nix dans un autre appareil. (ce qui est l'un des avantages de Nix)
