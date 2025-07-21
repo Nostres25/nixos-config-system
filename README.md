@@ -33,7 +33,7 @@ Même s'il est recommandé d'utiliser un home-manager et les flakes pour un meil
 ## Organisation du système
 
 ## État du système
-Tout d'abord et pour faire court, mon système utilise Gnome comme environnement de bureau et un [home manager](https://nixos.wiki/wiki/Home_Manager). Je compte utiliser les flakes à l'avenir pour débloquer de nouvelles fonctionnalités, pour garantir une meilleure staibilité de mon système et pour maîtriser davantage Nix.
+Tout d'abord et pour faire court, mon système utilise Gnome comme environnement de bureau, un [home manager](https://nixos.wiki/wiki/Home_Manager), et je compte utiliser les flakes à l'avenir. Pour débloquer de nouvelles fonctionnalités, pour garantire une meilleure staibilité de mon système et pour maîtriser davantage Nix.
 
 ## Développement Nix
 je tiens à préciser que par souci de praticité, j'ai une organisation un peu particulière pour ma configuration Nix.
@@ -104,7 +104,7 @@ Solution trouvée :
   };
 }
 ```
-Seulement mon ordinateur portable (Unowhy Y13) n'est pas compatible en vu de ses pilotes de gestion de la batterie :/
+Seulement, mon ordinateur portable (Unowhy Y13) n'est pas compatible en vu de ses pilotes de gestion de la batterie :/
 
 ### Définir des extensions firefox
 Pour la configuration Nix de firefox en général, je vous invite à regarder ma configuration dans le fichier [`home-nostres/packages.nix`](./home-nostres/packages.nix). Ici on s'intéresse surtout à l'ajout d'extensions firefox en déclaratif.</br>
@@ -243,8 +243,10 @@ La solution a été d'ajouter [un swap](https://fr.wikipedia.org/wiki/Espace_d%2
   # [...]
 }
 ```
+Vous devrez ensuite redémarrer votre appareil après avoir exécuté `sudo nixos-rebuild switch` pour activer le swap.
 
-### Pouvoir définir une échelle plus précise sur Gnome
+
+### Pouvoir définir une échelle d’affichage plus précise sur Gnome
 Par défaut, à l'installation de NixOs, je pouvais définir uniquement 100% ou 200% comme échelle d'affichage.</br>
 Pour pouvoir définir une échelle plus précise sur Gnome. Comme 125%, j'ai du faire ceci:
 
