@@ -130,12 +130,18 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    # The Nano editor is also installed by default.
+    # Missing packages: 
+    # - marionnet (https://www.marionnet.org/site/index.php/)
+    # - Game Maker Studio 2 (https://gamemaker.io/fr/blog/introducing-gamemaker-studio-2)
+    # - pnpm2nix or bun2nix 
+
 
     # Dev
     vscodium
     nodejs
     pnpm
+    husky
     postgresql
     jdk21
     eclipses.eclipse-jee
@@ -154,6 +160,9 @@
 
     # for everyone
     libreoffice
+
+    # for disk formatting
+    gparted
 
     # To run windows app
     wineWowPackages.stable
