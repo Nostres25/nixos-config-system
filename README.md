@@ -8,15 +8,15 @@ Ce document contient :
 
 Si vous ne connaissez pas, NixOs est une [distributions linux](https://fr.wikipedia.org/wiki/Distribution_Linux) pas comme les autres.</br>
 En effet, contrairement à la plupart des distributions linux, il ne respecte pas [la norme de la hiérarchie des systèmes de fichiers (FHS)](https://fr.wikipedia.org/wiki/Filesystem_Hierarchy_Standard).</br>
-En effet, il est basé sur le [gestionnaire de paquets Nix](https://fr.wikipedia.org/wiki/Nix_(gestionnaire_de_paquets)), qui promet la reproductibilité, la robustesse, la portabilité et la stabilité. On a l'habitude de le présenter comme un système qu'on peut coder. C'est-à-dire que sa configuration est déclarative.</br>
+Il est basé sur le [gestionnaire de paquets Nix](https://fr.wikipedia.org/wiki/Nix_(gestionnaire_de_paquets)), qui promet la reproductibilité, la robustesse, la portabilité et la stabilité. On a l'habitude de le présenter comme un système qu'on peut coder. C'est-à-dire que sa configuration est déclarative.</br>
 Pour en savoir plus, je vous invite à vous renseigner sur [NixOs](https://fr.wikipedia.org/wiki/NixOS) et [Nix](https://fr.wikipedia.org/wiki/Nix_(gestionnaire_de_paquets)) à travers wikipedia, des vidéos ou autre.
-###### Car oui, le gestionnaire de paquets Nix est également utilisable sur Windows les autres distributions linux
+###### Car oui, le gestionnaire de paquets Nix est également utilisable sur les autres distributions linux
 
 ## Nix/NixOs : difficile et chronophage ?
 
 J'ai découvert NixOs grâce à un bon ami qui m'en a parlé. J'ai par la suite souhaité l'essayer, pour finir par l'adopter !
 Ma crainte initiale était qu'il faille passer par des étapes compliquées et/ou très chronophages pour installer le moindre paquet ou pour changer de petites options.</br>
-Et en effet NixOs demande un certain temps de compréhension et requiert beaucoup de temps pour le personnaliser exactement comme on le souhaite, en passant par des paramètres avancés. Surtout si tient à tout configurer en déclaratif afin d'avoir un système reproductible au maximum.
+Et en effet NixOs demande un certain temps de compréhension et requiert beaucoup de temps pour le personnaliser exactement comme on le souhaite, en passant par des paramètres avancés. Surtout si on tient à tout configurer en déclaratif afin d'avoir un système reproductible au maximum.
 
 Mais en réalité ce n'est pas une nécéssité. Si on installes NixOs avec un [environnement de bureau](https://fr.wikipedia.org/wiki/Environnement_de_bureau) comme Gnome ou Plasma KDE, le système sera **en apparence** identique à un autre système linux utilisant le même environnement de bureau. Firefox y est préinstallé et beaucoup de paramètres sont modifiables via l'application "Paramètres". La différence se situe surtout dans la gestion des paquets et dans les options du système qu'on souhaite reproductibles.
 ###### Les paramètres modifiés via les applications, les différents paquets ou depuis l'application "Paramètres" ne seront pas dans la configuration Nix et ne seront donc pas exportés si vous transférez votre configuration Nix dans un autre appareil. (ce qui est l'un des avantages de Nix)
@@ -33,7 +33,7 @@ Même s'il est recommandé d'utiliser un home-manager et les flakes pour un meil
 ## Organisation du système
 
 ## État du système
-Tout d'abord et pour faire court, mon système utilise Gnome comme environnement de bureau et un [home manager](https://nixos.wiki/wiki/Home_Manager). Je compte utiliser les flakes à l'avenir pour débloquer de nouvelles fonctionnalités, pour garantir une meilleure staibilité de mon système et pour maîtriser davantage Nix.
+Tout d'abord et pour faire court, mon système utilise Gnome comme environnement de bureau, un [home manager](https://nixos.wiki/wiki/Home_Manager), et je compte utiliser les flakes à l'avenir. Pour débloquer de nouvelles fonctionnalités, pour garantire une meilleure staibilité de mon système et pour maîtriser davantage Nix.
 
 ## Développement Nix
 je tiens à préciser que par souci de praticité, j'ai une organisation un peu particulière pour ma configuration Nix.
@@ -104,7 +104,7 @@ Solution trouvée :
   };
 }
 ```
-Seulement mon ordinateur portable (Unowhy Y13) n'est pas compatible en vu de ses pilotes de gestion de la batterie :/
+Seulement, mon ordinateur portable (Unowhy Y13) n'est pas compatible en vu de ses pilotes de gestion de la batterie :/
 
 ### Définir des extensions firefox
 Pour la configuration Nix de firefox en général, je vous invite à regarder ma configuration dans le fichier [`home-nostres/packages.nix`](./home-nostres/packages.nix). Ici on s'intéresse surtout à l'ajout d'extensions firefox en déclaratif.</br>
@@ -243,8 +243,10 @@ La solution a été d'ajouter [un swap](https://fr.wikipedia.org/wiki/Espace_d%2
   # [...]
 }
 ```
+Vous devrez ensuite redémarrer votre appareil après avoir exécuté `sudo nixos-rebuild switch` pour activer le swap.
 
-### Pouvoir définir une échelle plus précise sur Gnome
+
+### Pouvoir définir une échelle d’affichage plus précise sur Gnome
 Par défaut, à l'installation de NixOs, je pouvais définir uniquement 100% ou 200% comme échelle d'affichage.</br>
 Pour pouvoir définir une échelle plus précise sur Gnome. Comme 125%, j'ai du faire ceci:
 
