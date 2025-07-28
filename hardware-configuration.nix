@@ -15,6 +15,12 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  # Disable automatic mouse sleep mode 
+  boot.kernelParams = [ 
+    # example kernel module parameter
+    "usbcore.autosuspend=-1"
+  ];
+
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/77f6b894-0b9d-437c-a74d-afc4f9eb5d0b";
       fsType = "ext4";

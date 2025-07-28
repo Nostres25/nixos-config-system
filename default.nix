@@ -178,9 +178,8 @@
     # To display upgrades
     nvd
 
-    # for Nvidia Optimus PRIME (laptops)
+    # for id of gpu bus useful to enable Nvidia Optimus PRIME (laptops)
     lshw
-
   ];
   
   # Script for display upgrades
