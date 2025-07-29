@@ -121,6 +121,19 @@
       enable = true;
       userName = "Nostres25";
       userEmail = config.variables.email;
+
+      aliases = {
+        ci = "commit";
+        co = "checkout";
+        s = "status";
+      };
+
+      extraConfig = {
+      credential.helper = "${
+          pkgs.git.override { withLibsecret = true; }
+        }/bin/git-credential-libsecret";
+      };
+
     };
   };
 }
