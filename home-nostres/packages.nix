@@ -61,6 +61,7 @@
         DisplayMenuBar = "default-off"; # alternatives: "always", "never" or "default-on"
         SearchBar = "unified"; # alternative: "separate"
         SearchEngines = {
+          # Doesn't works
           Default = "Ecosia search"; # Name of the search engine like it's writed in firefox settings
         };
 
@@ -80,7 +81,7 @@
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
             installation_mode = "normal_installed";
           };
-          # Bitwarden:
+          # Bitwarden: doesn't works
           "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden_password_manager/latest.xpi";
             installation_mode = "normal_installed";
@@ -99,10 +100,10 @@
       enable = true;
       syntaxHighlighting.enable = true;
 
-      shellAliases = {
+      shellAliases = { # Todo change for nixos-config-system
         ll = "ls -l";
         update = "sudo nixos-rebuild switch";
-        nixconf = "codium ~/.config/nixos";
+        nixconf = "codium ~/.config/nixos-config-system";
       };
       history.size = 10000; 
 
