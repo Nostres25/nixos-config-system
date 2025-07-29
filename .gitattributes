@@ -1,1 +1,2 @@
 hardware-configuration.nix merge=ours
+.gitignore merge=ours
