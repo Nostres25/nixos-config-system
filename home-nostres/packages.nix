@@ -103,7 +103,7 @@
       shellAliases = {
         ll = "ls -l";
         update = "sudo nixos-rebuild switch";
-        nixconf = "codium ~/.config/nixos-config-system";
+        nixconf = "codium ~/.config/nixos";
         commitconf = "./commitconf.sh $1";
         pushconf = "./pushconf.sh";
       };
