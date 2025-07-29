@@ -12,8 +12,19 @@
     ./display.nix
     ./home-manager.nix
   ];
-
   hardware.enableAllFirmware  = true;
+
+  # Enable OpenGL
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      # ... your Open GL, Vulkan and VAAPI drivers
+      # more details : https://nixos.wiki/wiki/Intel_Graphics
+      # vpl-gpu-rt          # for newer GPUs on NixOS >24.05 or unstable, with Xe graphics
+      # onevpl-intel-gpu  # for newer GPUs on NixOS <= 24.05
+      intel-media-sdk   # for older GPUs, with intel graphics, like with Tiger Lake for AN515-57 with i5 11400H
+    ];
+  };
 
   # Auto updating
   system.autoUpgrade = {
