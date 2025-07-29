@@ -13,6 +13,8 @@
     ./home-manager.nix
   ];
 
+  hardware.enableAllFirmware = true;
+
   # Auto updating
   system.autoUpgrade = {
     enable = true;
@@ -27,11 +29,6 @@
   };
 
   nix.settings.auto-optimise-store = true;
-
-  # Enable OpenGL
-  hardware.graphics = {
-    enable = true;
-  };
 
   # To enable flakes
   nix.extraOptions = ''experimental-features = nix-command flakes'';
@@ -177,9 +174,6 @@
     
     # To display upgrades
     nvd
-
-    # for id of gpu bus useful to enable Nvidia Optimus PRIME (laptops)
-    lshw
   ];
   
   # Script for display upgrades
