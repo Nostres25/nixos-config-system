@@ -100,7 +100,7 @@
       enable = true;
       syntaxHighlighting.enable = true;
 
-      shellAliases = { # Todo change for nixos-config-system
+      shellAliases = {
         ll = "ls -l";
         update = "sudo nixos-rebuild switch";
         nixconf = "codium ~/.config/nixos-config-system";
@@ -121,6 +121,18 @@
       enable = true;
       userName = "Nostres25";
       userEmail = config.variables.email;
+
+      aliases = {
+        ci = "commit";
+        co = "checkout";
+        s = "status";
+      };
+
+      extraConfig = {
+      credential.helper = "${
+          pkgs.git.override { withLibsecret = true; }
+        }/bin/git-credential-libsecret";
+      };
     };
   };
 }
