@@ -100,10 +100,11 @@
       enable = true;
       syntaxHighlighting.enable = true;
 
-      shellAliases = { # Todo change for nixos-config-system
+      shellAliases = {
         ll = "ls -l";
         update = "sudo nixos-rebuild switch";
         nixconf = "codium ~/.config/nixos-config-system";
+        pushconf = "./pushconf.sh";
       };
       history.size = 10000; 
 
@@ -133,7 +134,6 @@
           pkgs.git.override { withLibsecret = true; }
         }/bin/git-credential-libsecret";
       };
-
     };
   };
 }
