@@ -104,6 +104,7 @@
         ll = "ls -l";
         update = "sudo nixos-rebuild switch";
         nixconf = "codium ~/.config/nixos-config-system";
+        pushconf = "./pushconf.sh";
       };
       history.size = 10000; 
 
