@@ -7,7 +7,7 @@
   imports =
     [ 
       (modulesPath + "/installer/scan/not-detected.nix")
-      ./hardware-specific-configuration/y13.nix
+      ./hardware-specific-configurations/y13.nix
     ];
 
   boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "usb_storage" "sd_mod" "sdhci_pci" "rtsx_usb_sdmmc" ];
