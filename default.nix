@@ -13,6 +13,8 @@
     ./home-manager.nix
   ];
 
+  hardware.enableAllFirmware  = true;
+
   # Auto updating
   system.autoUpgrade = {
     enable = true;
@@ -28,7 +30,7 @@
 
   nix.settings.auto-optimise-store = true;
 
-  # Enabled for nix-gui
+  # To enable flakes
   nix.extraOptions = ''experimental-features = nix-command flakes'';
 
   # Bootloader.
@@ -172,7 +174,6 @@
     
     # To display upgrades
     nvd
-
   ];
   
   # Script for display upgrades
@@ -232,7 +233,7 @@
       CPU_MIN_PERF_ON_BAT = 0;
       CPU_MAX_PERF_ON_BAT = 90;
 
-      #Optional helps save long term battery health - doesn't works on Y13 (no driver support)
+      # Optional helps save long term battery health - doesn't works on Y13 & AN515-57 (no driver support)
       START_CHARGE_THRESH_BAT0 = 40; # 40 and below it starts to charge
       STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
 
