@@ -188,6 +188,9 @@
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
 
+  # see https://nixos.wiki/wiki/Fwupd
+  services.fwupd.enable = true;
+
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = false; # Open ports in the firewall for Steam Remote Play
