@@ -103,7 +103,7 @@
       shellAliases = { # Todo change for nixos-config-system
         ll = "ls -l";
         update = "sudo nixos-rebuild switch";
-        nixconf = "codium ~/.config/nixos";
+        nixconf = "codium ~/.config/nixos-config-system";
       };
       history.size = 10000; 
 

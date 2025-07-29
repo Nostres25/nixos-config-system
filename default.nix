@@ -13,7 +13,7 @@
     ./home-manager.nix
   ];
 
-  hardware.enableAllFirmware = true;
+  hardware.enableAllFirmware  = true;
 
   # Auto updating
   system.autoUpgrade = {
