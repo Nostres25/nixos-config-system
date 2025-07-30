@@ -7,8 +7,6 @@
     discord
     steam
     thunderbird
-    
-    octave # i just want to try it
 
     /*(pkgs.dockerTools.buildImage {
       name = "hello-docker";
@@ -81,9 +79,9 @@
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
             installation_mode = "normal_installed";
           };
-          # Bitwarden: doesn't works
+          # Bitwarden
           "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden_password_manager/latest.xpi";
+            install_url = "https://addons.mozilla.org/firefox/downloads/file/4525374/bitwarden_password_manager-2025.6.1.xpi";
             installation_mode = "normal_installed";
           };
 
@@ -101,6 +99,8 @@
       package = pkgs.vscodium;
       profiles.default = {
         extensions = with pkgs.vscode-extensions; [
+          # ... <-- Vscode extensions. Format: <publisher>.<extension>. You can find extension names here : https://mynixos.com/packages/vscode-extensions/2
+        # Exemple:
           jnoortheen.nix-ide
         ];
         
