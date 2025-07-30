@@ -103,7 +103,7 @@
         extensions = with pkgs.vscode-extensions; [
           jnoortheen.nix-ide
         ];
-        # not working with vscodium : 
+        
         userSettings = {
           "nix.serverPath" = "nixd";
           "nix.enableLanguageServer" = true;
