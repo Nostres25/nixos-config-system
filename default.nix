@@ -20,6 +20,8 @@
     enable = true;
     extraPackages = with pkgs; [
       # ... your Open GL, Vulkan and VAAPI drivers
+      
+      # Intel Graphics Quick Sync Video :
       # more details : https://nixos.wiki/wiki/Intel_Graphics
       # vpl-gpu-rt          # for newer GPUs on NixOS >24.05 or unstable, with Xe graphics
       # onevpl-intel-gpu  # for newer GPUs on NixOS <= 24.05
@@ -101,9 +103,6 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-
-  # Fix right click - not working ?
-  # services.libinput.touchpad.clickMethod = "buttonareas";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
