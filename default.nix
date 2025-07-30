@@ -13,6 +13,7 @@
     ./home-manager.nix
   ];
   hardware.enableAllFirmware  = true;
+  boot.supportedFilesystems = [ "ntfs" ];
 
   # Enable OpenGL
   hardware.graphics = {
