@@ -130,8 +130,8 @@
         ll = "ls -l";
         update = "sudo nixos-rebuild switch";
         nixconf = "codium ~/.config/nixos";
-        commitconf = "exec ./commitconf.sh";
-        pushconf = "exec ./pushconf.sh";
+        commitconf = "exec ./commitconf.sh &";
+        pushconf = "exec ./pushconf.sh &";
       };
       history.size = 10000; 
 
