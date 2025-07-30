@@ -59,8 +59,8 @@
         DisplayMenuBar = "default-off"; # alternatives: "always", "never" or "default-on"
         SearchBar = "unified"; # alternative: "separate"
         SearchEngines = {
-          # Doesn't works
-          Default = "Ecosia search"; # Name of the search engine like it's writed in firefox settings
+          # Doesn't works: Ecosia search
+          Default = "ECOSIA SEARCH";
         };
 
         /* ---- EXTENSIONS ---- */
@@ -130,8 +130,8 @@
         ll = "ls -l";
         update = "sudo nixos-rebuild switch";
         nixconf = "codium ~/.config/nixos";
-        commitconf = "exec ./commitconf.sh &";
-        pushconf = "exec ./pushconf.sh &";
+        commitconf = "exec ~/.config/nixos/commitconf.sh &";
+        pushconf = "exec ~/.config/nixos/pushconf.sh &";
       };
       history.size = 10000; 
 
