@@ -151,7 +151,6 @@
 
 
     # Dev
-    vscodium
     nodejs
     pnpm
     husky

@@ -1,6 +1,6 @@
 { ... }:
 
-{ # home configuration of my nostres user is linked here (~/.config/nixos/home/home.nix)
+{ # home configuration of my nostres user is linked here (~/.config/nixos/home-nostres/default.nix)
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
