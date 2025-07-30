@@ -9,5 +9,4 @@ do
     git checkout $BRANCH;
     git push
 done
-
-git checkout $ORIGINALBRANCH
+    git checkout $ORIGINALBRANCH
