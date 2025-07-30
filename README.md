@@ -97,7 +97,7 @@ Pour cela ajoutez dans votre fichier utilisateur (`home.nix`) ceci:
     package = pkgs.vscodium; # à remplacer par pkgs.vscode si vous ne voulez pas de vscodium
     profiles.default = {
       extensions = with pkgs.vscode-extensions; [
-        # ... <-- Vos extensions. Format: <développeur>.<nom>. Vous pouvez la trouver sur https://mynixos.com/packages/vscode-extensions/2
+        # ... <-- Vos extensions. Format: <éditeur>.<nom>. Vous pouvez la trouver sur https://mynixos.com/packages/vscode-extensions/2
         # Exemple:
         jnoortheen.nix-ide
       ];
