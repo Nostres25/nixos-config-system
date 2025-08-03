@@ -1,1 +1,2 @@
-personal-data*
+personal-data*.nix
+hardware-configuration.nix

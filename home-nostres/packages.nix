@@ -7,8 +7,6 @@
     discord
     steam
     thunderbird
-    
-    octave # i just want to try it
 
     /*(pkgs.dockerTools.buildImage {
       name = "hello-docker";
@@ -61,7 +59,8 @@
         DisplayMenuBar = "default-off"; # alternatives: "always", "never" or "default-on"
         SearchBar = "unified"; # alternative: "separate"
         SearchEngines = {
-          Default = "Ecosia search"; # Name of the search engine like it's writed in firefox settings
+          # Doesn't works: Ecosia search
+          Default = "ECOSIA SEARCH";
         };
 
         /* ---- EXTENSIONS ---- */
@@ -80,9 +79,9 @@
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
             installation_mode = "normal_installed";
           };
-          # Bitwarden:
+          # Bitwarden
           "{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden_password_manager/latest.xpi";
+            install_url = "https://addons.mozilla.org/firefox/downloads/file/4525374/bitwarden_password_manager-2025.6.1.xpi";
             installation_mode = "normal_installed";
           };
 
@@ -95,6 +94,34 @@
       };
     };
 
+    vscode = {
+      enable = true;
+      package = pkgs.vscodium;
+      profiles.default = {
+        extensions = with pkgs.vscode-extensions; [
+          # ... <-- Vscode extensions. Format: <publisher>.<extension>. You can find extension names here : https://mynixos.com/packages/vscode-extensions/2
+        # Exemple:
+          jnoortheen.nix-ide
+        ];
+        
+        userSettings = {
+          "nix.serverPath" = "nixd";
+          "nix.enableLanguageServer" = true;
+          "nixpkgs" = {
+            "expr" ="import <nixpkgs> { }";
+          };
+          "formatting" = {
+            "command" = [
+              "nixfmt"
+            ];
+          };
+          "nix.formatterPath" = "nixfmt";
+          "git.autofetch" = true;
+          "update.showReleaseNotes" = false;
+        };
+      };
+    };
+
     zsh = {
       enable = true;
       syntaxHighlighting.enable = true;
@@ -103,6 +130,8 @@
         ll = "ls -l";
         update = "sudo nixos-rebuild switch";
         nixconf = "codium ~/.config/nixos";
+        commitconf = "exec ~/.config/nixos/commitconf.sh &";
+        pushconf = "exec ~/.config/nixos/pushconf.sh &";
       };
       history.size = 10000; 
 
@@ -120,6 +149,18 @@
       enable = true;
       userName = "Nostres25";
       userEmail = config.variables.email;
+
+      aliases = {
+        ci = "commit";
+        co = "checkout";
+        s = "status";
+      };
+
+      extraConfig = {
+      credential.helper = "${
+          pkgs.git.override { withLibsecret = true; }
+        }/bin/git-credential-libsecret";
+      };
     };
   };
 }

@@ -88,6 +88,47 @@ Pour "Déplacer le fichier .home.nix avec un home manager", "Coder sa configurat
 
 Pour les problèmes et astuces autour des ordinateurs portables, il y a [une page dédiée aux ordinateurs portables](https://nixos.wiki/wiki/Laptop) sur le wiki de NixOs.
 
+### Vscodium/Vscode: Définir des extensions et paramètres utilisateur (userSettings)
+Pour cela ajoutez dans votre fichier utilisateur (`home.nix`) ceci:
+```nix
+{
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscodium; # à remplacer par pkgs.vscode si vous ne voulez pas de vscodium
+    profiles.default = {
+      extensions = with pkgs.vscode-extensions; [
+        # ... <-- Vos extensions. Format: <éditeur>.<nom>. Vous pouvez la trouver sur https://mynixos.com/packages/vscode-extensions/2
+        # Exemple:
+        jnoortheen.nix-ide
+      ];
+      
+      userSettings = {
+        # ... <-- Paramètres vscode comme dans le fichier settings.json
+        # Exemple:
+        "nix.serverPath" = "nixd";
+        "nix.enableLanguageServer" = true;
+        "nixpkgs" = {
+          "expr" ="import <nixpkgs> { }";
+        };
+        "formatting" = {
+          "command" = [
+            "nixfmt"
+          ];
+        };
+        "nix.formatterPath" = "nixfmt";
+        "git.autofetch" = true;
+        "update.showReleaseNotes" = false;
+      };
+    };
+  };
+}
+```
+
+> [!INFO]
+> Si vous avez une erreur du service du home manager lorsque vous faites `sudo nixos-rebuild switch`, c'est probablement parce que vous aviez déjà ouvert vscodium/vscode et que le home manager n'arrive pas à remplacer le fichier `settings.json` existant. Pour régler cela vous devez supprimer le fichier `~/.config/VSCodium/User/settings.json` ou le fichier rm `/home/nostres/.config/VSCode/User/settings.json` pour VsCode.
+
+
+
 ### Laptop: Arrêt du chargement de la batterie à 80% pour préserver sa durée de vie
 Solution trouvée : 
 ```nix

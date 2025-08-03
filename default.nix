@@ -12,6 +12,22 @@
     ./display.nix
     ./home-manager.nix
   ];
+  hardware.enableAllFirmware  = true;
+  boot.supportedFilesystems = [ "ntfs" ];
+
+  # Enable OpenGL
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      # ... your Open GL, Vulkan and VAAPI drivers
+      
+      # Intel Graphics Quick Sync Video :
+      # more details : https://nixos.wiki/wiki/Intel_Graphics
+      # vpl-gpu-rt          # for newer GPUs on NixOS >24.05 or unstable, with Xe graphics
+      # onevpl-intel-gpu  # for newer GPUs on NixOS <= 24.05
+      intel-media-sdk   # for older GPUs, with intel graphics, like with Tiger Lake for AN515-57 with i5 11400H
+    ];
+  };
 
   # Auto updating
   system.autoUpgrade = {
@@ -28,7 +44,7 @@
 
   nix.settings.auto-optimise-store = true;
 
-  # Enabled for nix-gui
+  # To enable flakes
   nix.extraOptions = ''experimental-features = nix-command flakes'';
 
   # Bootloader.
@@ -98,9 +114,6 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  # Fix right click - not working ?
-  # services.libinput.touchpad.clickMethod = "buttonareas";
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
     nostres = {
@@ -148,7 +161,6 @@
 
 
     # Dev
-    vscodium
     nodejs
     pnpm
     husky
@@ -245,7 +257,7 @@
       CPU_MIN_PERF_ON_BAT = 0;
       CPU_MAX_PERF_ON_BAT = 90;
 
-      #Optional helps save long term battery health - doesn't works on Y13 (no driver support)
+      # Optional helps save long term battery health - doesn't works on Y13 & AN515-57 (no driver support)
       START_CHARGE_THRESH_BAT0 = 40; # 40 and below it starts to charge
       STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
 
