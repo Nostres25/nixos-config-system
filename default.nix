@@ -194,6 +194,10 @@
     
     # To display upgrades
     nvd
+
+    # monitoring system
+    monitorets
+    mission-center
   ];
   
   # Script for display upgrades
