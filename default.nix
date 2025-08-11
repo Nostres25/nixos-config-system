@@ -48,8 +48,18 @@
   nix.extraOptions = ''experimental-features = nix-command flakes'';
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  #  For dual boot
+  boot.loader = {
+    efi = {
+      canTouchEfiVariables = true;
+    };
+    grub = {
+      enable = true;
+      devices = [ "nodev" ];
+      efiSupport = true;
+      useOSProber = true;
+    };
+  };
 
   networking.hostName = "nixos-nostres"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -184,6 +194,10 @@
     
     # To display upgrades
     nvd
+
+    # monitoring system
+    monitorets
+    mission-center
   ];
   
   # Script for display upgrades
@@ -250,6 +264,8 @@
     };
   };
   powerManagement.powertop.enable = true;
+
+  hardware.bluetooth.powerOnBoot = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
