@@ -14,4 +14,5 @@ do
     git checkout $ORIGINALBRANCH;
     git stash pop;
 done
-    git checkout $ORIGINALBRANCH
+    
+git checkout $ORIGINALBRANCH
