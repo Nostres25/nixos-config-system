@@ -182,6 +182,7 @@
 
     # for everyone
     libreoffice
+    gimp
 
     # for disk formatting
     gparted
