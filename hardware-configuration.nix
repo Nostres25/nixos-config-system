@@ -27,6 +27,12 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
+  fileSystems."/run/media/nostres/18CF1DA23467A031" =
+    {
+      device = "/dev/disk/by-uuid/18CF1DA23467A031";
+      fsType = "ntfs";
+    };
+
   swapDevices = [ 
     {
       device = "/swapfile";
