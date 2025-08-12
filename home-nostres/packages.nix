@@ -102,6 +102,8 @@
           # ... <-- Vscode extensions. Format: <publisher>.<extension>. You can find extension names here : https://mynixos.com/packages/vscode-extensions/2
         # Exemple:
           jnoortheen.nix-ide
+          dbaeumer.vscode-eslint
+          ms-python.python
         ];
         
         userSettings = {
@@ -118,6 +120,7 @@
           "nix.formatterPath" = "nixfmt";
           "git.autofetch" = true;
           "update.showReleaseNotes" = false;
+          "editor.defaultFormatter" = "dbaeumer.vscode-eslint";
         };
       };
     };
