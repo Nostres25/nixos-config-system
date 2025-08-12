@@ -120,6 +120,7 @@
           "nix.formatterPath" = "nixfmt";
           "git.autofetch" = true;
           "update.showReleaseNotes" = false;
+          "editor.defaultFormatter" = "dbaeumer.vscode-eslint";
         };
       };
     };
