@@ -106,6 +106,7 @@
           jnoortheen.nix-ide
           dbaeumer.vscode-eslint
           ms-python.python
+          ritwickdey.liveserver
         ];
         
         userSettings = {
