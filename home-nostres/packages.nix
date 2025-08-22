@@ -5,7 +5,11 @@
 
   home.packages = with pkgs; [
     discord
-    steam
+    # Steam to play on linux :
+    # - to known compatible games & to have proton tips by game, see https://www.protondb.com/ 
+    # - to known if game anti-cheats allow to play on linux, see https://areweanticheatyet.com/
+    # - try to add gamemoderun to launch options overwatch when activited on the system
+    steam # 
     thunderbird
 
     /*(pkgs.dockerTools.buildImage {
@@ -31,8 +35,6 @@
 
   # Program configurations
   programs = {
-
-
     firefox = {
       enable = true;
       languagePacks = [ "fr" "en-US" ];
@@ -131,7 +133,7 @@
 
       shellAliases = {
         ll = "ls -l";
-        update = "sudo nixos-rebuild switch";
+        update = "sudo nixos-rebuild switch"; # TODO add --flake /home/nostres/.config/nixos for flakes
         nixconf = "codium ~/.config/nixos";
         commitconf = "exec ~/.config/nixos/commitconf.sh &";
         pushconf = "exec ~/.config/nixos/pushconf.sh &";
@@ -159,11 +161,18 @@
         s = "status";
       };
 
+      # To store credentials (tokens & passwords)
       extraConfig = {
       credential.helper = "${
           pkgs.git.override { withLibsecret = true; }
         }/bin/git-credential-libsecret";
       };
+    };
+
+    # For fan controls & monitoring
+    coolercontrol = {
+      enable = true;
+      nvidiaSupport = true;
     };
   };
 }
