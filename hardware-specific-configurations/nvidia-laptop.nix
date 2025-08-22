@@ -68,4 +68,9 @@
   programs.steam.package = pkgs.steam.override {
       extraPkgs = pkgs': with pkgs'; [ bumblebee primus ];
   }; 
+
+  # fan control
+  environment.systemPackages = with pkgs; [ 
+    nbfc-linux # read: https://github.com/nbfc-linux/nbfc-linux
+ ];
 }
