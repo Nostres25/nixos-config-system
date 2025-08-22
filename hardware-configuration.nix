@@ -12,8 +12,10 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "vmd" "ahci" "nvme" "usb_storage" "uas" "sd_mod" ];
+
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
+
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
@@ -33,12 +35,17 @@
       fsType = "ntfs";
     };
 
+  # Swap (a partition swap is better than a swap file)
   swapDevices = [ 
     {
       device = "/swapfile";
       size = 16 * 1024;
+      randomEncryption.enable = true; # for swap data security
     }
   ];
+
+  # Enable zram to compress blocs of data in swap
+  zramSwap.enable = true;
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
