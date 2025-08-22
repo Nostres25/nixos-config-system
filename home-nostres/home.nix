@@ -1,6 +1,7 @@
-{ ... }:
+{ pkgs, ... }:
 
 { # home configuration of my nostres user is linked here (~/.config/nixos/home-nostres/default.nix)
+  # Generate home manager flake with : nix flake new example -t github:nix-community/home-manager#nixos
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -22,8 +23,20 @@
 
   imports = [
   ./personal-data-vars.nix
+  ./gnome-settings.nix
   ./packages.nix
+
   ];
 
+  home.file.".config/nbfc.json".source = ../nbfc.json;
+
+  
+
+
+  /* unnecessary because enabled for system
+  nix = {
+    package = pkgs.nix;
+    settings.experimental-features = [ "nix-command" "flakes" ];
+  };*/
   
 }
