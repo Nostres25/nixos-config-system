@@ -6,5 +6,6 @@ in
   imports = [
     (import "${home-manager}/nixos")
   ];
-  home-manager.users.nostres = import ./home-nostres;
+
+  home-manager.users.nostres = import ./home-nostres/home.nix;
 }
