@@ -195,6 +195,10 @@
     
     # To display upgrades
     nvd
+
+    # monitoring system
+    monitorets
+    mission-center
   ];
   
   # Script for display upgrades
@@ -209,11 +213,14 @@
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
 
+  # see https://nixos.wiki/wiki/Fwupd
+  services.fwupd.enable = true;
+
   programs.steam = {
     enable = true;
-    remotePlay.openFirewall = false; # Open ports in the firewall for Steam Remote Play
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = false; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall = false; # Open ports in the firewall for Steam Local Network Game Transfers
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -236,30 +243,20 @@
   # networking.firewall.enable = false;
 
   # power management for laptop
-  services.power-profiles-daemon.enable = false; # conflict with tlp
-  services.tlp = {
-    enable = true;
-    settings = {
-      TLP_DEFAULT_MODE = "BAT";
-      TLP_PERSISTENT_DEFAULT = 1;
-
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-
-      CPU_MIN_PERF_ON_AC = 0;
-      CPU_MAX_PERF_ON_AC = 100;
-      CPU_MIN_PERF_ON_BAT = 0;
-      CPU_MAX_PERF_ON_BAT = 90;
-
-      # Optional helps save long term battery health - doesn't works on Y13 & AN515-57 (no driver support)
-      START_CHARGE_THRESH_BAT0 = 40; # 40 and below it starts to charge
-      STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
-
+  services.power-profiles-daemon.enable = false; # conflict with tlp & cpufreq
+  services.auto-cpufreq.enable = true;
+  services.auto-cpufreq.settings = {
+    battery = {
+      governor = "powersave";
+      turbo = "never";
+    };
+    charger = {
+      governor = "performance";
+      turbo = "auto";
     };
   };
+
+
   powerManagement.powertop.enable = true;
 
   hardware.bluetooth.powerOnBoot = false;

@@ -399,4 +399,6 @@ Seulement si ça a été fait dans `configuration.nix`, ça ne s'appliquera pas 
 
 ### Activation et configuration de docker avec containers en déclaratif (solution inconnue)
 
+### Dual boot windows/linux: Faire fonctionner une bibliothèque steam sur une parition NTFS avec linux
+https://www.reddit.com/r/linux_gaming/comments/wc6wzj/correctly_mount_ntfs_for_steam_proton_games/
 
