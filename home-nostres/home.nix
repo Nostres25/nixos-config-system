@@ -23,6 +23,7 @@
   imports = [
   ./personal-data-vars.nix
   ./packages.nix
+  ./gnome-settings.nix
   ];
 
   

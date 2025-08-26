@@ -45,7 +45,7 @@
   nix.settings.auto-optimise-store = true;
 
   # To enable flakes
-  nix.extraOptions = ''experimental-features = nix-command flakes'';
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Bootloader.
   #  For dual boot
@@ -207,8 +207,6 @@
       nvd diff $(ls -d1v /nix/var/nix/profiles/system-*-link|tail -n 2)
     '';
 
-  # TODO if using flakes nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-
   programs.zsh.enable = true;
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
@@ -260,6 +258,25 @@
   powerManagement.powertop.enable = true;
 
   hardware.bluetooth.powerOnBoot = false;
+
+  # Kernel parameters
+  boot.kernelParams = [ 
+    # All kernel parameters here : https://www.kernel.org/doc/html/v5.0/admin-guide/kernel-parameters.html
+    # Disable automatic mouse sleep mode
+    "usbcore.autosuspend=-1"
+  ];
+
+  # Enable sysrq shortcuts for freezes (due to out-of-memory in example)
+  # see https://wikipedia.org/wiki/Magic_SysRq_key for more informations
+  # Useful shortcuts, triggered using Alt+SysRq+<key> (Alt+Impr+<key>) :
+  # 
+  # h: Print help to the system log.
+  # f: Trigger the kernel oom killer.
+  # s: Sync data to disk before triggering the reset options below.
+  # e: SIGTERM all processes except PID 0.
+  # i: SIGKILL all processes except PID 0.
+  # b: Reboot the system.
+  boot.kernel.sysctl."kernel.sysrq" = 1;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
