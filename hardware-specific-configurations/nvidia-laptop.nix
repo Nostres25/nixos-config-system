@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
     # For offloading, `modesetting` is needed additionally,
   # otherwise the X-server will be running permanently on nvidia,
@@ -61,4 +61,11 @@
       sync.enable = false;
     };
   };
+
+
+  # Nvidia Optimus PRIME compatibilities with steam
+  nixpkgs.config.nvidia.acceptLicense = true;
+  programs.steam.package = pkgs.steam.override {
+      extraPkgs = pkgs': with pkgs'; [ bumblebee primus ];
+  }; 
 }

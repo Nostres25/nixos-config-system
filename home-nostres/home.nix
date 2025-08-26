@@ -1,6 +1,6 @@
 { pkgs, ... }:
 
-{ # home configuration of my nostres user is linked here (~/.config/nixos/home-nostres/default.nix)
+{ # home configuration of my nostres user is linked here (~/.config/nixos/home-nostres/home.nix)
   # Generate home manager flake with : nix flake new example -t github:nix-community/home-manager#nixos
 
   # Home Manager needs a bit of information about you and the
