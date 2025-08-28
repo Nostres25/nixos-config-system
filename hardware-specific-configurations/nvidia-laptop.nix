@@ -84,4 +84,6 @@ in*/ {
   environment.systemPackages = with pkgs; [ 
     nbfc-linux # read: https://github.com/nbfc-linux/nbfc-linux
  ];
+
+ programs.gamemode.enable = true;
 }
