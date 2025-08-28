@@ -1,6 +1,17 @@
 { config, pkgs, ... }:
-{
-    # For offloading, `modesetting` is needed additionally,
+/* TODO need to lean flakes & modularize nixos
+let nvidia-offload = pkgs.writeShellScriptBin "nbidia-offload" ''
+  export __NV_PRIME_RENDER_OFFLOAD=1
+  export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+  export __GLX_VENDOR_LIBRARY_NAME=nvidia
+  export __VK_LAYER_NV_optimus=NVIDIA_only
+  exec "$@"
+  '';
+in*/ {
+
+
+  
+  # For offloading, `modesetting` is needed additionally,
   # otherwise the X-server will be running permanently on nvidia,
   # thus keeping the GPU always on (see `nvidia-smi`).
   # (For hybrid graphics configurations inte/nvidia or amd/nvidia)
@@ -19,7 +30,7 @@
     # Enable this if you have graphical corruption issues or application crashes after waking
     # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
     # of just the bare essentials.
-    powerManagement.enable = false;
+    powerManagement.enable = true; # Activate that have fixed waking up from stand by freezes
 
     # Fine-grained power management. Turns off GPU when not in use.
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
