@@ -124,11 +124,6 @@
         "wheel"
         "docker"
       ];
-      /*
-        packages = with pkgs; [ # Using home manager ?
-          thunderbird
-        ];
-      */
     };
   };
 

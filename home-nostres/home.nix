@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 { # home configuration of my nostres user is linked here (~/.config/nixos/home-nostres/default.nix)
 
@@ -19,6 +19,11 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+
+  nix = {
+    package = pkgs.nix;
+    settings.experimental-features = [ "nix-command" "flakes" ];
+  };
 
   imports = [
   ./personal-data-vars.nix
