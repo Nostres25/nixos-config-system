@@ -11,6 +11,7 @@
     # - try to add gamemoderun to launch options overwatch when activited on the system
     steam # 
     thunderbird
+    windsurf
 
     /*(pkgs.dockerTools.buildImage {
       name = "hello-docker";
@@ -168,12 +169,6 @@
           pkgs.git.override { withLibsecret = true; }
         }/bin/git-credential-libsecret";
       };
-    };
-
-    # For fan controls & monitoring
-    coolercontrol = {
-      enable = true;
-      nvidiaSupport = true;
     };
   };
 }

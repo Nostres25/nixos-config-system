@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ./nvidia-laptop.nix
+   ./nvidia-laptop.nix
     # ./nbfc.nix # TODO learn about flakes to continue
   ];
 }

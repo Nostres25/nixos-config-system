@@ -16,6 +16,12 @@
   hardware.enableAllFirmware  = true;
   boot.supportedFilesystems = [ "ntfs" ];
 
+  # For fan controls & monitoring
+  programs.coolercontrol = {
+    enable = true;
+    nvidiaSupport = true;
+  };
+
   # Enable OpenGL
   hardware.graphics = {
     enable = true;
