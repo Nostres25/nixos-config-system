@@ -6,9 +6,6 @@
 
 {
   imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-
     ./display.nix
     ./main-user.nix
     inputs.home-manager.nixosModules.default
@@ -123,13 +120,6 @@
     "wheel"
     "docker"
   ];
-
-  home-manager = {
-    extraSpecialArgs = {inherit inputs; };
-    users = {
-      "nostres" = import ./home-nostres.nix;
-    };
-  };
   
   /*users.users = {
     nostres = {
@@ -174,11 +164,12 @@
     # Dev
     nodejs
     pnpm
-    yarn
     husky
     postgresql
     jdk21
     eclipses.eclipse-jee
+    python314
+    yarn
     
     # CLI
     git
@@ -207,10 +198,6 @@
     
     # To display upgrades
     nvd
-
-    # monitoring system
-    monitorets
-    mission-center
   ];
   
   # Script for display upgrades
