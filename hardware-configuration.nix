@@ -7,52 +7,41 @@
   imports =
     [ 
       (modulesPath + "/installer/scan/not-detected.nix")
-      ./hardware-specific-configurations/an515-57.nix
-    
+      ./hardware-specific-configurations/crawlerE30e.nix
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "vmd" "ahci" "nvme" "usb_storage" "uas" "sd_mod" ];
-
+  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "sdhci_pci" ];	
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
-
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/77f6b894-0b9d-437c-a74d-afc4f9eb5d0b";
+    { device = "/dev/disk/by-uuid/a0fb9168-e883-4ea0-aea5-80865004a2a4";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/E4C0-081D";
+    { device = "/dev/disk/by-uuid/53DD-B2A0";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  fileSystems."/run/media/nostres/18CF1DA23467A031" =
-    {
-      device = "/dev/disk/by-uuid/18CF1DA23467A031";
-      fsType = "ntfs";
-    };
-
-  # Swap (a partition swap is better than a swap file)
-  swapDevices = [ 
-    {
-      device = "/swapfile";
-      size = 16 * 1024;
-      randomEncryption.enable = true; # for swap data security
+  swapDevices =[ 
+    { 
+      device = "/dev/disk/by-uuid/4d6d18ff-56c7-4905-901e-d5b7bd6a912c";
+      randomEncryption.enable = true;
     }
   ];
 
   # Enable zram to compress blocs of data in swap
-  zramSwap.enable = true;
+  zramSwap.enable = false; # Useful 
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction
   # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
   networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.enp2s0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.enp3s0.useDHCP = lib.mkDefault true;
   # networking.interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
